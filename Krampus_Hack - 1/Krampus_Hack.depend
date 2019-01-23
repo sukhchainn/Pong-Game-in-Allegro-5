@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1547757107 source:i:\krampus_hack\main.c
+	<stdio.h>
+	<allegro5/allegro5.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/mouse.h>
+	<pthread.h>
+	"buttons.c"
+
+1545805681 i:\krampus_hack\buttons.c
+	"buttons.h"
+
+1545805425 i:\krampus_hack\buttons.h
+	"buttons.c"
+
+1547845367 source:i:\krampus_hack - 1\main.c
+	<stdio.h>
+	<allegro5/allegro5.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/mouse.h>
+	"buttons.c"
+
+1545805681 i:\krampus_hack - 1\buttons.c
+	"buttons.h"
+
+1545805425 i:\krampus_hack - 1\buttons.h
+	"buttons.c"
+
