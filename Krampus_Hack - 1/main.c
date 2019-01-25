@@ -56,6 +56,7 @@ int main()
 
     ALLEGRO_DISPLAY *display = al_create_display(MAXWIDTH, MAXHEIGHT);
     ALLEGRO_EVENT_QUEUE *ev_queue = al_create_event_queue();
+    ALLEGRO_EVENT event;
     ALLEGRO_TIMER *timer = al_create_timer(1.0/60.0);
     ALLEGRO_COLOR acolor = al_map_rgb(204, 102, 153);
     ALLEGRO_COLOR bcolor = al_map_rgb(0, 255, 0);
@@ -75,7 +76,6 @@ int main()
 
     while(!done)
     {
-        ALLEGRO_EVENT event;
         al_draw_filled_rectangle(0, 0, 800, 50, bcolor);
         al_draw_filled_rectangle(0, 550, 800, 600, bcolor);
 
