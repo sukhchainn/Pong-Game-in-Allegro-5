@@ -33,6 +33,10 @@ void MovePaddleDown(Paddle *ship);
 
 int x = 50, y = (MAXHEIGHT/2);
 
+enum KEYS{UP, DOWN, W, S, SPACE};
+bool keys[5] = {false, false, false, false, false};
+
+
 int main()
 {
     al_init();
@@ -96,6 +100,8 @@ int main()
                 al_draw_textf(font1, al_map_rgb(13, 40, 100),400, MAXHEIGHT/2, 1, "\n Player 2 has Won with %d points \n", player1);
             }
 
+        if(event.type == ALLEGRO_EVENT_TIMER)
+        {
          //REC1
             if(y <= REC1Y && Dir == UP_RIGHT)
             {
@@ -167,23 +173,24 @@ int main()
 
         //Ball
             if(Dir == UP_RIGHT){
-                x += 3;
+                x += 8;
                 y -= 3;
             }
             else if(Dir == DOWN_RIGHT){
-                x += 3;
+                x += 8;
                 y += 3;
             }
             else if(Dir == DOWN_LEFT){
-                x -= 3;
+                x -= 8;
                 y += 3;
             }
             else if(Dir == UP_LEFT){
-                x -= 3;
+                x -= 8;
                 y -= 3;
             }
+        }
 
-        if(event.type = ALLEGRO_EVENT_KEY_DOWN)
+        if(event.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
 			switch(event.keyboard.keycode)
 			{
@@ -193,35 +200,67 @@ int main()
 				case ALLEGRO_KEY_ESCAPE:
 					done = true;
 					break;
-				case ALLEGRO_KEY_UP:
-                    MovePaddleUp(&pad2);
-					//keys[UP] = true;
-					break;
-				case ALLEGRO_KEY_DOWN:
-                    MovePaddleDown(&pad2);
-					//keys[DOWN] = true;
-					break;
 				case ALLEGRO_KEY_W:
 					MovePaddleUp(&pad1);
-					//keys[LEFT] = true;
+					keys[W] = true;
 					break;
 				case ALLEGRO_KEY_S:
 					MovePaddleDown(&pad1);
-					//keys[RIGHT] = true;
+					keys[S] = true;
 					break;
-				//case ALLEGRO_KEY_SPACE:
-					//keys[SPACE] = true;
-					//FireBullet(bullets, NUM_BULLETS, ship);
-					//break;
+                case ALLEGRO_KEY_UP:
+                    MovePaddleUp(&pad2);
+					keys[UP] = true;
+					break;
+				case ALLEGRO_KEY_DOWN:
+                    MovePaddleDown(&pad2);
+					keys[DOWN] = true;
+					break;
 			}
+        }
+
+        if(event.type == ALLEGRO_EVENT_KEY_UP)
+		{
+			switch(event.keyboard.keycode)
+			{
+			    case ALLEGRO_KEY_W:
+					keys[W] = false;
+					break;
+				case ALLEGRO_KEY_S:
+					keys[S] = false;
+					break;
+				case ALLEGRO_KEY_UP:
+					keys[UP] = false;
+					break;
+				case ALLEGRO_KEY_DOWN:
+					keys[DOWN] = false;
+					break;
+			}
+		}
+            if(keys[UP])
+            {
+                MovePaddleUp(&pad2);
             }
+            else if(keys[DOWN])
+            {
+                MovePaddleDown(&pad2);
+            }
+            if(keys[W])
+            {
+                MovePaddleUp(&pad1);
+            }
+            else if(keys[S])
+            {
+                MovePaddleDown(&pad1);
+            }
+
         al_draw_filled_circle(x, y, 8, al_map_rgb(0, 0, 0));
         al_draw_textf(font1, al_map_rgb(13, 40, 100),400, 15, 1, "%d : %d", player1, player2);
         }
         al_flip_display();
         if(al_is_event_queue_empty(ev_queue));
         al_wait_for_event(ev_queue, &event);
-        al_rest(0.01);
+        al_rest(0.005);
         al_clear_to_color(al_map_rgb(255, 255, 255));
 
    }
