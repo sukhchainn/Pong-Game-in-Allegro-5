@@ -28,8 +28,9 @@ enum Direction{
 
 typedef struct Paddle Paddle;
 
-void MovePaddleUp(Paddle *ship);
-void MovePaddleDown(Paddle *ship);
+void MovePaddleUp(Paddle *pad);
+void MovePaddleDown(Paddle *pad);
+void AI_Paddle(Paddle *pad1, Paddle *pad2);
 
 int x = 50, y = (MAXHEIGHT/2);
 
@@ -253,6 +254,7 @@ int main()
             {
                 MovePaddleDown(&pad1);
             }
+            AI_Paddle(&pad1, &pad2);
 
         al_draw_filled_circle(x, y, 8, al_map_rgb(0, 0, 0));
         al_draw_textf(font1, al_map_rgb(13, 40, 100),400, 15, 1, "%d : %d", player1, player2);
@@ -271,17 +273,34 @@ int main()
     return 0;
 }
 
-void MovePaddleUp(Paddle *ship)
+void MovePaddleUp(Paddle *pad)
 {
-	if(!(ship->y1 < REC1Y)){
-	ship->y1 -= 5;
-	ship->y2 -= 5;
+	if(!(pad->y1 < REC1Y)){
+	pad->y1 -= 5;
+	pad->y2 -= 5;
 	}
 }
-void MovePaddleDown(Paddle *ship)
+
+void MovePaddleDown(Paddle *pad)
 {
-	if(!(ship->y2 > REC2Y)){
-	ship->y1 += 5;
-	ship->y2 += 5;
+	if(!(pad->y2 > REC2Y)){
+	pad->y1 += 5;
+	pad->y2 += 5;
 	}
+}
+
+void AI_Paddle(Paddle *pad1, Paddle *pad2)
+{
+
+    if((pad1->y1 < 150))
+        MovePaddleDown(pad2);
+    else if((x > 400) && (y > 450))
+        MovePaddleDown(pad2);
+
+    if((pad1->y2 > 550))
+        MovePaddleUp(pad2);
+    else if((x > 400) && (y < 250))
+        MovePaddleUp(pad2);
+
+        return 0;
 }
